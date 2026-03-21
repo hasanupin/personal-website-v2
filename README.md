@@ -1,37 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Moh Hasanudin Muslim — Personal Portfolio
+
+A modern, professional developer portfolio built with Next.js 16, React 19, and Tailwind CSS v4. Features smooth scroll animations, dark/light mode, and a fully responsive design.
+
+**Live:** [hasanupin.vercel.app](https://hasanupin.vercel.app)
+
+## Features
+
+- **Dark/Light Mode** — toggle with localStorage persistence, no flash on load
+- **Smooth Scroll Navigation** — sticky navbar with active section highlighting
+- **Scroll Animations** — fade-in-up effects via IntersectionObserver (no external libraries)
+- **Responsive Design** — mobile-first with hamburger menu on small screens
+- **SEO Optimized** — Open Graph and Twitter Card metadata
+- **Fully Static** — pre-rendered at build time for fast loading
+
+## Sections
+
+| Section | Description |
+|---------|-------------|
+| **Hero** | Bold intro with gradient text, status badge, and CTAs |
+| **About** | Professional summary with stats grid (years, companies, projects) |
+| **Experience** | Timeline-style work history with tech tags |
+| **Skills** | Categorized skill cards (Frontend, Backend, Database, DevOps, Mobile) |
+| **Projects** | Project showcase cards with descriptions and links |
+| **Education** | Academic background |
+| **Contact** | Social links (GitHub, LinkedIn, Email) |
+
+## Tech Stack
+
+- **Next.js 16.2** (App Router, Server Components)
+- **React 19** with TypeScript 5 (strict mode)
+- **Tailwind CSS v4** via `@tailwindcss/postcss`
+- **Geist** font family (Sans + Mono)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm build      # Production build
+pnpm start      # Start production server
+pnpm lint       # Run ESLint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+app/
+  layout.tsx              # Root layout (metadata, fonts, ThemeProvider)
+  page.tsx                # Main page composing all sections
+  globals.css             # Tailwind config, dark mode, animations
+  data/
+    portfolio.ts          # All content as typed constants
+  components/
+    navbar.tsx            # Sticky nav, mobile menu, theme toggle
+    hero.tsx              # Hero section
+    about.tsx             # About + stats
+    experience.tsx        # Timeline work history
+    skills.tsx            # Skill category cards
+    projects.tsx          # Project cards grid
+    education.tsx         # Education card
+    contact.tsx           # Social links
+    footer.tsx            # Copyright footer
+    theme-provider.tsx    # Dark/light mode provider
+    scroll-reveal.tsx     # IntersectionObserver animation wrapper
+    icons.tsx             # SVG icon components
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Updating Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All portfolio content lives in `app/data/portfolio.ts`. Edit this single file to update personal info, experience, skills, projects, education, and social links.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# personal-website-v2
+Push to GitHub and connect to [Vercel](https://vercel.com) for automatic deployments.
