@@ -50,7 +50,7 @@ export const personalInfo = {
 export const stats = [
   { label: "Years Experience", value: "8+" },
   { label: "Companies", value: "4+" },
-  { label: "Projects Delivered", value: "10+" },
+  { label: "Projects Delivered", value: "12+" },
   { label: "Technologies", value: "15+" },
 ];
 
@@ -91,16 +91,16 @@ export const experiences: Experience[] = [
     company: "HREasily",
     role: "Software Engineer",
     period: "2019 - 2021",
-    location: "Jakarta, Indonesia (Remote)",
+    location: "Singapore (Remote)",
     description:
-      "Contributed to Indonesia's leading SaaS platform for HR, accounting, and business operations.",
+      "Developed and maintained multi-client HR and payroll SaaS platform serving businesses across Southeast Asia, similar to Mekari's model but supporting multiple client configurations.",
     highlights: [
-      "Built features for time attendance and employee management modules",
-      "Developed RESTful APIs integrating with third-party services",
-      "Participated in system architecture discussions and technical documentation",
-      "Improved application performance through code optimization and refactoring",
+      "Built and maintained MY Payroll and ID Payroll modules handling country-specific salary calculations, tax rules, and statutory compliance",
+      "Developed Leave Module with configurable leave policies, approval workflows, and balance tracking across multiple clients",
+      "Implemented multi-tenant architecture supporting diverse payroll configurations for Malaysian and Indonesian markets",
+      "Collaborated with cross-functional teams to deliver client-specific customizations and integrations",
     ],
-    technologies: ["PHP", "Yii2", "Jquery", "MySQL", "REST API"],
+    technologies: ["PHP", "Yii2", "jQuery", "MySQL", "REST API"],
     companyUrl: "https://hreasily.com",
   },
 ];
@@ -151,9 +151,21 @@ export const projects: Project[] = [
   {
     title: "Multi Country - Payroll Management System",
     description:
-      "A comprehensive multi-country payroll platform handling salary calculations, tax computations, and compliance for Southeast Asian markets.",
-    technologies: ["Yii2", "ReactJS", "MySQL", "REST API"],
-    liveUrl: "https:/hreasily.com",
+      "A multi-client payroll platform supporting MY Payroll and ID Payroll with country-specific tax rules, statutory compliance, and leave management modules.",
+    technologies: ["PHP", "Yii2", "jQuery", "MySQL", "REST API"],
+    liveUrl: "https://hreasily.com",
+  },
+  {
+    title: "Industrial Quality Control System",
+    description:
+      "Custom quality control application for an automotive factory, enabling real-time defect tracking, inspection workflows, and quality metrics reporting to ensure production standards compliance.",
+    technologies: ["PHP", "Laravel", "MySQL", "jQuery"],
+  },
+  {
+    title: "Kanban Management System",
+    description:
+      "Production kanban board system for an automotive factory, managing work-in-progress limits, production scheduling, and visual workflow tracking across manufacturing stages.",
+    technologies: ["PHP", "Laravel", "MySQL", "jQuery"],
   },
   {
     title: "Personal Portfolio",
