@@ -48,8 +48,8 @@ export const personalInfo = {
 };
 
 export const stats = [
-  { label: "Years Experience", value: "5+" },
-  { label: "Companies", value: "2+" },
+  { label: "Years Experience", value: "8+" },
+  { label: "Companies", value: "4+" },
   { label: "Projects Delivered", value: "10+" },
   { label: "Technologies", value: "15+" },
 ];
@@ -87,6 +87,22 @@ export const experiences: Experience[] = [
     technologies: ["PHP", "Laravel", "AngularJS", "MySQL", "REST API"],
     companyUrl: "https://mekari.com",
   },
+  {
+    company: "HREasily",
+    role: "Software Engineer",
+    period: "2019 - 2021",
+    location: "Jakarta, Indonesia (Remote)",
+    description:
+      "Contributed to Indonesia's leading SaaS platform for HR, accounting, and business operations.",
+    highlights: [
+      "Built features for time attendance and employee management modules",
+      "Developed RESTful APIs integrating with third-party services",
+      "Participated in system architecture discussions and technical documentation",
+      "Improved application performance through code optimization and refactoring",
+    ],
+    technologies: ["PHP", "Yii2", "Jquery", "MySQL", "REST API"],
+    companyUrl: "https://hreasily.com",
+  },
 ];
 
 export const skillCategories: SkillCategory[] = [
@@ -98,12 +114,12 @@ export const skillCategories: SkillCategory[] = [
   {
     name: "Backend",
     icon: "server",
-    skills: ["PHP", "Laravel", "Node.js", "REST API", "GraphQL"],
+    skills: ["PHP", "Laravel", "Node.js", "REST API"],
   },
   {
     name: "Database",
     icon: "database",
-    skills: ["MySQL", "PostgreSQL", "Redis", "MongoDB"],
+    skills: ["MySQL", "PostgreSQL", "Oracle", "Redis", "MongoDB"],
   },
   {
     name: "DevOps & Cloud",
@@ -133,6 +149,13 @@ export const projects: Project[] = [
     liveUrl: "https://mekari.com",
   },
   {
+    title: "Multi Country - Payroll Management System",
+    description:
+      "A comprehensive multi-country payroll platform handling salary calculations, tax computations, and compliance for Southeast Asian markets.",
+    technologies: ["Yii2", "ReactJS", "MySQL", "REST API"],
+    liveUrl: "https:/hreasily.com",
+  },
+  {
     title: "Personal Portfolio",
     description:
       "Modern developer portfolio built with Next.js and Tailwind CSS, featuring dark mode, smooth animations, and responsive design.",
@@ -143,7 +166,7 @@ export const projects: Project[] = [
 
 export const education: Education = {
   degree: "Bachelor of Information Systems",
-  institution: "University of Merdeka Malang",
+  institution: "STIMIK Pradnya Paramita, Malang",
   period: "2014 - 2021",
   description:
     "Studied information systems with focus on software engineering, database management, and web technologies.",
