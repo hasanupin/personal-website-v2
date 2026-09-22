@@ -1,40 +1,19 @@
 import { education } from "@/app/data/portfolio";
-import { ScrollReveal } from "./scroll-reveal";
-import { GraduationCapIcon } from "./icons";
+import { Section } from "./section";
 
+/** One entry, so it gets one entry: the same row shape as Experience, at a fraction
+ *  of the height. Giving a single degree a full card would overstate it. */
 export function Education() {
   return (
-    <section id="education" className="py-20 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            <span className="gradient-text">Education</span>
-          </h2>
-          <div className="w-16 h-1 bg-primary rounded-full mb-12" />
-        </ScrollReveal>
-
-        <ScrollReveal animation="fade-in-up">
-          <div className="max-w-2xl rounded-2xl border border-border bg-surface-elevated p-8 transition-all hover:shadow-lg">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-bg text-primary flex-shrink-0">
-                <GraduationCapIcon />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-foreground mb-1">
-                  {education.degree}
-                </h3>
-                <p className="text-primary font-medium mb-1">
-                  {education.institution}
-                </p>
-                <p className="text-sm text-muted mb-3">{education.period}</p>
-                <p className="text-sm text-muted leading-relaxed">
-                  {education.description}
-                </p>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
+    <Section id="education" label="education">
+      <div className="sm:grid sm:grid-cols-[9rem_1fr] sm:gap-x-6">
+        <p className="font-mono text-sm text-muted">{education.period}</p>
+        <div className="mt-3 sm:mt-0">
+          <h3 className="font-semibold">{education.degree}</h3>
+          <p className="font-mono text-sm text-muted">{education.institution}</p>
+          <p className="mt-3 max-w-2xl leading-relaxed text-muted">{education.description}</p>
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }

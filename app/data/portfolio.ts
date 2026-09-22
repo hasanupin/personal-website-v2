@@ -13,13 +13,13 @@ export interface Project {
   title: string;
   description: string;
   technologies: string[];
-  liveUrl?: string;
+  /** The company site behind the platform. Not a public demo of the product itself. */
+  companyUrl?: string;
   githubUrl?: string;
 }
 
 export interface SkillCategory {
   name: string;
-  icon: string;
   skills: string[];
 }
 
@@ -32,8 +32,9 @@ export interface Education {
 
 export interface SocialLink {
   name: string;
+  /** Shown as the link text, so the label always says where the link goes. */
+  handle: string;
   url: string;
-  icon: string;
 }
 
 export const personalInfo = {
@@ -41,18 +42,12 @@ export const personalInfo = {
   shortName: "Hasanudin",
   title: "Full-Stack Software Engineer",
   tagline:
-    "Building scalable web applications with modern technologies. Passionate about clean code, great user experiences, and turning complex problems into elegant solutions.",
-  email: "hasanudin.muslim@gmail.com",
+    "I build payroll and HR platforms for Southeast Asia: multi-country salary calculation, statutory tax and compliance rules, and the APIs that keep them in sync.",
+  email: "hasan@hasanudin.dev",
   location: "Malang, Indonesia",
   currentWork: "Singapore",
+  availability: "Open to new roles",
 };
-
-export const stats = [
-  { label: "Years Experience", value: "8+" },
-  { label: "Companies", value: "4+" },
-  { label: "Projects Delivered", value: "12+" },
-  { label: "Technologies", value: "15+" },
-];
 
 export const experiences: Experience[] = [
   {
@@ -93,10 +88,10 @@ export const experiences: Experience[] = [
     period: "2019 - 2021",
     location: "Singapore (Remote)",
     description:
-      "Developed and maintained multi-client HR and payroll SaaS platform serving businesses across Southeast Asia, similar to Mekari's model but supporting multiple client configurations.",
+      "Developed and maintained a multi-client HR and payroll SaaS platform serving businesses across Southeast Asia, supporting a separate payroll configuration per client.",
     highlights: [
       "Built and maintained MY Payroll and ID Payroll modules handling country-specific salary calculations, tax rules, and statutory compliance",
-      "Developed Leave Module with configurable leave policies, approval workflows, and balance tracking across multiple clients",
+      "Developed the Leave module with configurable leave policies, approval workflows, and balance tracking across multiple clients",
       "Implemented multi-tenant architecture supporting diverse payroll configurations for Malaysian and Indonesian markets",
       "Collaborated with cross-functional teams to deliver client-specific customizations and integrations",
     ],
@@ -107,71 +102,72 @@ export const experiences: Experience[] = [
 
 export const skillCategories: SkillCategory[] = [
   {
-    name: "Frontend",
-    icon: "code",
+    name: "frontend",
     skills: ["React", "Next.js", "TypeScript", "AngularJS", "Tailwind CSS", "HTML/CSS"],
   },
   {
-    name: "Backend",
-    icon: "server",
+    name: "backend",
     skills: ["PHP", "Laravel", "Node.js", "REST API"],
   },
   {
-    name: "Database",
-    icon: "database",
+    name: "database",
     skills: ["MySQL", "PostgreSQL", "Oracle", "Redis", "MongoDB"],
   },
   {
-    name: "DevOps & Cloud",
-    icon: "cloud",
+    name: "cloud",
     skills: ["AWS Lambda", "Serverless", "Docker", "CI/CD", "Git"],
   },
   {
-    name: "Mobile",
-    icon: "smartphone",
+    name: "mobile",
     skills: ["Android", "React Native", "Kotlin"],
   },
 ];
 
+/**
+ * Projects carrying a companyUrl are shipped platforms behind a client login, so
+ * the link goes to the company, never to a demo that does not exist. The rest are
+ * internal systems with no public surface and are described only.
+ */
 export const projects: Project[] = [
   {
     title: "Payroll Management System",
     description:
-      "A comprehensive multi-country payroll platform handling salary calculations, tax computations, and compliance for Southeast Asian markets.",
+      "A multi-country payroll platform handling salary calculations, tax computations, and statutory compliance for Southeast Asian markets.",
     technologies: ["Laravel", "ReactJS", "MySQL", "AWS Lambda", "Serverless"],
-    liveUrl: "https://ayp-group.com",
+    companyUrl: "https://ayp-group.com",
   },
   {
     title: "HR & Attendance Platform",
     description:
-      "Employee management system with time attendance tracking, leave management, and workforce analytics dashboard.",
+      "Employee management system with time attendance tracking, leave management, and a workforce analytics dashboard.",
     technologies: ["PHP", "Laravel", "AngularJS", "MySQL", "REST API"],
-    liveUrl: "https://mekari.com",
+    companyUrl: "https://mekari.com",
   },
   {
-    title: "Multi Country - Payroll Management System",
+    title: "Multi Country Payroll Management System",
     description:
       "A multi-client payroll platform supporting MY Payroll and ID Payroll with country-specific tax rules, statutory compliance, and leave management modules.",
     technologies: ["PHP", "Yii2", "jQuery", "MySQL", "REST API"],
-    liveUrl: "https://hreasily.com",
+    companyUrl: "https://hreasily.com",
   },
   {
     title: "Industrial Quality Control System",
     description:
-      "Custom quality control application for an automotive factory, enabling real-time defect tracking, inspection workflows, and quality metrics reporting to ensure production standards compliance.",
+      "Quality control application for an automotive factory: real-time defect tracking, inspection workflows, and quality metrics reporting against production standards.",
     technologies: ["PHP", "Laravel", "MySQL", "jQuery"],
   },
   {
     title: "Kanban Management System",
     description:
-      "Production kanban board system for an automotive factory, managing work-in-progress limits, production scheduling, and visual workflow tracking across manufacturing stages.",
+      "Production kanban board for an automotive factory, managing work-in-progress limits, production scheduling, and visual workflow tracking across manufacturing stages.",
     technologies: ["PHP", "Laravel", "MySQL", "jQuery"],
   },
   {
-    title: "Personal Portfolio",
+    title: "This Site",
     description:
-      "Modern developer portfolio built with Next.js and Tailwind CSS, featuring dark mode, smooth animations, and responsive design.",
+      "Next.js App Router portfolio with a class-based theme toggle and no client-side JavaScript outside the navbar.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    // TODO: point at the repository once it is public; this is the profile, and the label says so.
     githubUrl: "https://github.com/hasanupin",
   },
 ];
@@ -181,32 +177,38 @@ export const education: Education = {
   institution: "STIMIK Pradnya Paramita, Malang",
   period: "2014 - 2021",
   description:
-    "Studied information systems with focus on software engineering, database management, and web technologies.",
+    "Information systems with a focus on software engineering, database management, and web technologies.",
 };
 
 export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
+    handle: "github.com/hasanupin",
     url: "https://github.com/hasanupin",
-    icon: "github",
   },
   {
     name: "LinkedIn",
+    handle: "linkedin.com/in/muhammad-hasanudin",
     url: "https://linkedin.com/in/muhammad-hasanudin-070a4112b",
-    icon: "linkedin",
   },
   {
     name: "Email",
-    url: "mailto:hasan@hasanudin.dev",
-    icon: "mail",
+    handle: personalInfo.email,
+    url: `mailto:${personalInfo.email}`,
   },
 ];
 
+/** The rail index in each section is taken from this order, so nav and page cannot drift. */
 export const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
+  { label: "about", href: "#about" },
+  { label: "experience", href: "#experience" },
+  { label: "skills", href: "#skills" },
+  { label: "projects", href: "#projects" },
+  { label: "education", href: "#education" },
+  { label: "contact", href: "#contact" },
 ];
+
+/** Zero-padded rail index for a section id, derived from navLinks order. */
+export function sectionIndex(href: string): string {
+  return String(navLinks.findIndex((l) => l.href === href) + 1).padStart(2, "0");
+}

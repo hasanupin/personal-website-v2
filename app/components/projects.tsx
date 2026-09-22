@@ -1,79 +1,67 @@
 import { projects } from "@/app/data/portfolio";
-import { ScrollReveal } from "./scroll-reveal";
-import { ExternalLinkIcon, GithubIcon } from "./icons";
+import { Section, TechList } from "./section";
+
+/**
+ * Two weights, because the work has two weights: shipped platforms carry a full entry,
+ * smaller internal systems carry a line. Six identical cards would flatten that difference.
+ * Nothing links to a "demo" that a visitor cannot open.
+ */
+const platforms = projects.filter((p) => p.companyUrl);
+const other = projects.filter((p) => !p.companyUrl);
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 sm:py-24 bg-surface">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            Featured <span className="gradient-text">Projects</span>
-          </h2>
-          <div className="w-16 h-1 bg-primary rounded-full mb-12" />
-        </ScrollReveal>
+    <Section id="projects" label="projects">
+      <ol className="divide-y divide-rule">
+        {platforms.map((project) => (
+          <li key={project.title} className="py-8 first:pt-0">
+            <h3 className="text-lg font-semibold">{project.title}</h3>
+            <p className="mt-2 max-w-2xl leading-relaxed text-muted">{project.description}</p>
+            <div className="mt-4">
+              <TechList items={project.technologies} />
+            </div>
+            <a
+              href={project.companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block font-mono text-sm text-muted underline decoration-rule underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+            >
+              {project.companyUrl?.replace("https://", "")}
+            </a>
+          </li>
+        ))}
+      </ol>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
-            <ScrollReveal key={project.title} delay={i * 100}>
-              <div className="group flex flex-col h-full rounded-2xl border border-border bg-surface-elevated transition-all hover:shadow-lg hover:-translate-y-1 hover:border-primary/30 overflow-hidden">
-                {/* Color bar */}
-                <div className="h-1 bg-gradient-to-r from-primary to-purple-500" />
-
-                <div className="p-6 flex flex-col flex-1">
-                  {/* Title */}
-                  <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-muted leading-relaxed mb-4 flex-1">
-                    {project.description}
-                  </p>
-
-                  {/* Tech tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full bg-primary-bg px-3 py-1 text-xs font-medium text-primary font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex items-center gap-3 pt-4 border-t border-border">
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors"
-                      >
-                        <ExternalLinkIcon />
-                        Live Demo
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors"
-                      >
-                        <GithubIcon className="w-4 h-4" />
-                        Source
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </div>
-    </section>
+      <h3 className="mt-10 border-t border-rule pt-8 font-mono text-sm text-muted">
+        other work
+      </h3>
+      <ul className="mt-5 space-y-6">
+        {other.map((project) => (
+          <li key={project.title} className="sm:grid sm:grid-cols-[1fr_auto] sm:gap-x-6">
+            <div className="max-w-2xl">
+              <h4 className="font-medium">{project.title}</h4>
+              <p className="mt-1 text-sm leading-relaxed text-muted">{project.description}</p>
+              <p className="mt-2 font-mono text-xs text-muted">
+                {project.technologies.join(", ")}
+              </p>
+            </div>
+            <p className="mt-2 font-mono text-xs text-muted sm:mt-1 sm:text-right">
+              {project.githubUrl ? (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-rule underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+                >
+                  {project.githubUrl.replace("https://", "")}
+                </a>
+              ) : (
+                "client-owned, not public"
+              )}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 }

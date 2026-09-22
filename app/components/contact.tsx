@@ -1,58 +1,44 @@
-import { socialLinks, personalInfo } from "@/app/data/portfolio";
-import { ScrollReveal } from "./scroll-reveal";
-import { GithubIcon, LinkedinIcon, MailIcon } from "./icons";
+import { personalInfo, socialLinks } from "@/app/data/portfolio";
+import { Section } from "./section";
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  github: GithubIcon,
-  linkedin: LinkedinIcon,
-  mail: MailIcon,
-};
-
+/** Every link is labelled with its destination, so there is nothing to guess at and
+ *  no icon standing in for an address. */
 export function Contact() {
   return (
-    <section id="contact" className="py-20 sm:py-24 bg-surface">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
-        <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            Let&apos;s <span className="gradient-text">Connect</span>
-          </h2>
-          <div className="w-16 h-1 bg-primary rounded-full mb-6 mx-auto" />
-          <p className="max-w-lg mx-auto text-muted mb-10 leading-relaxed">
-            I&apos;m always open to discussing new projects, creative ideas, or
-            opportunities to be part of your vision. Feel free to reach out!
-          </p>
-        </ScrollReveal>
+    <Section id="contact" label="contact">
+      <p className="max-w-2xl leading-relaxed">
+        If you are hiring for payroll, HR, or fintech work in Southeast Asia, or you have a
+        system that has outgrown its first design, write to me. I read everything and reply to
+        anything specific.
+      </p>
 
-        <ScrollReveal animation="fade-in-up" delay={200}>
-          {/* Email CTA */}
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 mb-10"
+      <dl className="mt-8 divide-y divide-rule">
+        {socialLinks.map((link) => (
+          <div
+            key={link.name}
+            className="py-3 first:pt-0 last:pb-0 sm:grid sm:grid-cols-[7rem_1fr] sm:gap-x-6"
           >
-            <MailIcon className="w-5 h-5" />
-            Say Hello
-          </a>
-
-          {/* Social links */}
-          <div className="flex items-center justify-center gap-4">
-            {socialLinks.map((link) => {
-              const Icon = iconMap[link.icon];
-              return (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target={link.icon === "mail" ? undefined : "_blank"}
-                  rel={link.icon === "mail" ? undefined : "noopener noreferrer"}
-                  className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-surface-elevated text-muted transition-all hover:text-primary hover:border-primary/30 hover:-translate-y-1 hover:shadow-lg"
-                  aria-label={link.name}
-                >
-                  {Icon && <Icon />}
-                </a>
-              );
-            })}
+            <dt className="font-mono text-sm text-muted">{link.name.toLowerCase()}</dt>
+            <dd className="mt-1 sm:mt-0">
+              <a
+                href={link.url}
+                target={link.url.startsWith("mailto:") ? undefined : "_blank"}
+                rel={link.url.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                className="inline-flex min-h-11 items-center font-mono text-sm underline decoration-rule underline-offset-4 transition-colors hover:text-accent hover:decoration-accent sm:min-h-0"
+              >
+                {link.handle}
+              </a>
+            </dd>
           </div>
-        </ScrollReveal>
-      </div>
-    </section>
+        ))}
+      </dl>
+
+      <a
+        href={`mailto:${personalInfo.email}`}
+        className="mt-8 inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-5 font-mono text-sm text-accent-contrast transition-opacity hover:opacity-90"
+      >
+        Write to me
+      </a>
+    </Section>
   );
 }

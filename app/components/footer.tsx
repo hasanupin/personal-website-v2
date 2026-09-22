@@ -1,11 +1,13 @@
+import { personalInfo } from "@/app/data/portfolio";
+
 export function Footer() {
   return (
-    <footer className="border-t border-border py-8">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
-        <p className="text-sm text-muted">
-          &copy; {new Date().getFullYear()} Moh Hasanudin Muslim. Built with
-          Next.js & Tailwind CSS.
+    <footer className="border-t border-rule">
+      <div className="mx-auto flex max-w-5xl flex-col gap-1 px-5 py-8 font-mono text-xs text-muted sm:flex-row sm:justify-between sm:px-8">
+        <p>
+          &copy; {new Date().getFullYear()} {personalInfo.name}
         </p>
+        <p>Next.js, Tailwind CSS, IBM Plex</p>
       </div>
     </footer>
   );

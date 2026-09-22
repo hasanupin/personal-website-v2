@@ -24,19 +24,21 @@ pnpm lint         # ESLint (flat config, eslint.config.mjs)
 
 Single-page portfolio site using App Router in `app/`:
 
-- `layout.tsx` — root layout with Geist font, SEO metadata, ThemeProvider, dark mode anti-flash script
+- `layout.tsx` — root layout with IBM Plex Sans/Mono, SEO metadata, ThemeProvider, dark mode anti-flash script
 - `page.tsx` — main page composing all section components (Hero, About, Experience, Skills, Projects, Education, Contact, Footer)
-- `globals.css` — Tailwind v4 config, CSS custom properties for theming, dark mode via `@custom-variant dark`, scroll animation `@keyframes`
+- `globals.css` — Tailwind v4 config, CSS custom properties for theming, dark mode via `@custom-variant dark`, global `:focus-visible` ring, section `scroll-margin-top`
 - `data/portfolio.ts` — all portfolio content as typed constants (single source of truth for content updates)
 - `components/` — modular section components:
-  - **Server Components:** hero, about, experience, skills, projects, education, contact, footer, icons
-  - **Client Components (`'use client'`):** navbar (sticky nav + mobile menu + smooth scroll), theme-provider (dark/light toggle via `useSyncExternalStore`), scroll-reveal (IntersectionObserver animation wrapper)
+  - **Server Components:** hero, about, experience, skills, projects, education, contact, footer, section (shared `Section` frame + `TechList`)
+  - **Client Components (`'use client'`):** navbar (fixed nav + mobile menu + scrollspy), theme-provider (dark/light toggle via `useSyncExternalStore`)
 
 No `pages/` directory — this is App Router only. No additional dependencies beyond Next.js, React, and Tailwind.
 
 ## Key Patterns
 
+- **Design direction:** `DESIGN.md` is the source of direction (dials, palette, type, motif). Read it before any visual change; `antislop` is the filter applied on top of it, not a substitute for it
 - **Dark mode:** class-based toggle (`.dark` on `<html>`), persisted in `localStorage`, anti-flash inline script in layout
-- **Animations:** CSS `@keyframes` in `globals.css`, triggered by `scroll-reveal.tsx` adding classes on intersection
+- **Motion:** MOTION 1. Hover and focus states only, plus `scroll-behavior: smooth` behind a `prefers-reduced-motion` guard. No scroll-triggered or load animations
+- **Section frame:** every section but Hero renders through `Section` in `components/section.tsx`, which draws the monospace rail (index + slug). Rail indices come from `sectionIndex()` in `portfolio.ts`, so nav and page cannot drift
 - **Content updates:** edit only `app/data/portfolio.ts` — all sections import from this file
-- **Icons:** custom SVG components in `icons.tsx`, no external icon library
+- **Icons:** none. Controls are labelled in monospace text (`menu`/`close`, `dark`/`light`)

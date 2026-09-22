@@ -2,139 +2,68 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Palette: 2 cores + 1 accent (DESIGN.md). Warm paper/ink instead of the
+   blue-tinted default; burnt rust accent kept outside the blue-purple family. */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --surface: #f8fafc;
-  --surface-elevated: #ffffff;
-  --border: #e2e8f0;
-  --muted: #64748b;
-  --primary: #2563eb;
-  --primary-light: #3b82f6;
-  --primary-bg: #eff6ff;
-  --gradient-start: #2563eb;
-  --gradient-end: #7c3aed;
+  --background: #fbfbf9;
+  --foreground: #16181c;
+  --surface: #f2f2ee;
+  --rule: #dcdcd5;
+  --muted: #5a5e66;
+  --accent: #a33b12;
+  --accent-contrast: #ffffff;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #e2e8f0;
-  --surface: #111111;
-  --surface-elevated: #1a1a1a;
-  --border: #27272a;
-  --muted: #94a3b8;
-  --primary: #3b82f6;
-  --primary-light: #60a5fa;
-  --primary-bg: rgba(59, 130, 246, 0.1);
-  --gradient-start: #3b82f6;
-  --gradient-end: #a78bfa;
+  --background: #121316;
+  --foreground: #e8e8e4;
+  --surface: #1a1c20;
+  --rule: #2e3137;
+  --muted: #9aa0a8;
+  --accent: #e8743f;
+  --accent-contrast: #121316;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
-  --color-surface-elevated: var(--surface-elevated);
-  --color-border: var(--border);
+  --color-rule: var(--rule);
   --color-muted: var(--muted);
-  --color-primary: var(--primary);
-  --color-primary-light: var(--primary-light);
-  --color-primary-bg: var(--primary-bg);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-accent-contrast: var(--accent-contrast);
+
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+
+  /* Two radii only: tokens and blocks. Nothing is pill-shaped. */
+  --radius-sm: 2px;
+  --radius-md: 4px;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Gradient text utility */
-.gradient-text {
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* The focus ring is the accent's fourth role and the only one that is functional
+   rather than decorative. Never removed, never replaced by nothing. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 1px;
 }
 
-/* Scroll animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+/* Anchor targets clear the fixed navbar. */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* MOTION 1: the only motion on the page is the jump between sections, and it
+   yields to the reader's own setting. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 0.6s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.6s ease-out forwards;
-}
-
-/* Scroll reveal - hidden by default */
-.scroll-hidden {
-  opacity: 0;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Navbar backdrop */
-.nav-blur {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-/* Hero background pattern */
-.hero-pattern {
-  background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
-  background-size: 40px 40px;
 }
