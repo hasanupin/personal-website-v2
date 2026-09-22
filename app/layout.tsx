@@ -1,25 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { ThemeProvider } from "./components/theme-provider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Plex is a documentation superfamily: the mono shares the sans skeleton, so the
+// mono data gutter reads as a change of register, not a change of voice.
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
   title: "Moh Hasanudin Muslim | Full-Stack Software Engineer",
   description:
-    "Full-Stack Software Engineer specializing in PHP/Laravel, React, and cloud technologies. Building scalable web applications with modern tech stacks.",
+    "Full-Stack Software Engineer building multi-country payroll and HR systems for Southeast Asia with PHP/Laravel, React, and AWS.",
   keywords: [
     "Full-Stack Developer",
     "Software Engineer",
+    "Payroll Systems",
     "PHP",
     "Laravel",
     "React",
@@ -31,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Moh Hasanudin Muslim | Full-Stack Software Engineer",
     description:
-      "Full-Stack Software Engineer specializing in PHP/Laravel, React, and cloud technologies.",
+      "Full-Stack Software Engineer building multi-country payroll and HR systems for Southeast Asia.",
     type: "website",
     locale: "en_US",
   },
@@ -39,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Moh Hasanudin Muslim | Full-Stack Software Engineer",
     description:
-      "Full-Stack Software Engineer specializing in PHP/Laravel, React, and cloud technologies.",
+      "Full-Stack Software Engineer building multi-country payroll and HR systems for Southeast Asia.",
   },
 };
 
@@ -51,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${plexSans.variable} ${plexMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

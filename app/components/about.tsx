@@ -1,61 +1,41 @@
-import { personalInfo, stats } from "@/app/data/portfolio";
-import { ScrollReveal } from "./scroll-reveal";
+import { experiences, personalInfo, skillCategories } from "@/app/data/portfolio";
+import { Section } from "./section";
+
+// Derived from the record below, so the page cannot contradict the timeline.
+const firstYear = experiences[experiences.length - 1].period.slice(0, 4);
 
 export function About() {
   return (
-    <section id="about" className="py-20 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            About <span className="gradient-text">Me</span>
-          </h2>
-          <div className="w-16 h-1 bg-primary rounded-full mb-12" />
-        </ScrollReveal>
-
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Text */}
-          <ScrollReveal animation="slide-in-left">
-            <div className="space-y-4 text-muted leading-relaxed">
-              <p>
-                I&apos;m a Full-Stack Software Engineer with over 5 years of
-                experience building scalable web applications. Currently based
-                in {personalInfo.location}, working remotely for companies in
-                Singapore.
-              </p>
-              <p>
-                My expertise spans from backend systems with PHP/Laravel to
-                modern frontend applications with React and TypeScript. I&apos;m
-                passionate about writing clean, maintainable code and building
-                products that make a real impact.
-              </p>
-              <p>
-                I thrive in collaborative environments where I can contribute to
-                architecture decisions, mentor team members, and continuously
-                learn new technologies. When I&apos;m not coding, I enjoy
-                exploring new tech stacks and contributing to the developer
-                community.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          {/* Stats */}
-          <ScrollReveal animation="slide-in-right">
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl border border-border bg-surface-elevated p-6 text-center transition-all hover:shadow-lg hover:-translate-y-1"
-                >
-                  <div className="text-3xl sm:text-4xl font-bold gradient-text mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
+    <Section id="about" label="about">
+      <div className="max-w-2xl space-y-4 leading-relaxed">
+        <p>
+          I have been building payroll and HR systems since {firstYear}, for companies in
+          Singapore and Indonesia, working remotely from {personalInfo.location}.
+        </p>
+        <p>
+          Most of that work is the part of a product nobody sees: a salary calculation that has
+          to be right to the rupiah, statutory rules that differ by country and change every
+          year, and a leave balance that has to still reconcile after a policy is edited
+          mid-cycle. The interesting problems are in the edge cases, not the dashboard.
+        </p>
+        <p>
+          On a team I spend a fair share of my time in code review and on the testing and
+          deployment side, because in payroll a regression is somebody&apos;s pay slip. I work
+          across the stack, from Laravel services and MySQL schemas through to the React screens
+          on top of them.
+        </p>
       </div>
-    </section>
+
+      <dl className="mt-10 grid grid-cols-[8rem_1fr] gap-x-4 gap-y-3 border-t border-rule pt-6 font-mono text-sm">
+        <dt className="text-muted">since</dt>
+        <dd>{firstYear}</dd>
+        <dt className="text-muted">companies</dt>
+        <dd>{experiences.length}</dd>
+        <dt className="text-muted">payroll markets</dt>
+        <dd>ID, MY</dd>
+        <dt className="text-muted">core stack</dt>
+        <dd>{skillCategories[1].skills.slice(0, 2).join(", ")}, React, MySQL</dd>
+      </dl>
+    </Section>
   );
 }

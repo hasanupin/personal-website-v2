@@ -1,105 +1,56 @@
 import { experiences } from "@/app/data/portfolio";
-import { ScrollReveal } from "./scroll-reveal";
-import { BriefcaseIcon, MapPinIcon } from "./icons";
+import { Section, TechList } from "./section";
 
+/**
+ * The densest block on the page, and the one a hiring reader came for: period and
+ * location sit in a mono column so the timeline can be scanned without reading a word
+ * of prose. No cards, no center rail, no icons.
+ */
 export function Experience() {
   return (
-    <section id="experience" className="py-20 sm:py-24 bg-surface">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            Work <span className="gradient-text">Experience</span>
-          </h2>
-          <div className="w-16 h-1 bg-primary rounded-full mb-12" />
-        </ScrollReveal>
+    <Section id="experience" label="experience">
+      <ol>
+        {experiences.map((exp) => (
+          <li
+            key={exp.company}
+            className="border-t border-rule py-8 first:border-t-0 first:pt-0 last:pb-0 sm:grid sm:grid-cols-[9rem_1fr] sm:gap-x-6"
+          >
+            <div className="font-mono text-sm text-muted">
+              <p>{exp.period}</p>
+              <p className="mt-1">{exp.location}</p>
+            </div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border" />
-
-          {experiences.map((exp, i) => (
-            <ScrollReveal
-              key={exp.company}
-              animation={i % 2 === 0 ? "slide-in-left" : "slide-in-right"}
-              delay={i * 150}
-            >
-              <div
-                className={`relative mb-12 last:mb-0 md:w-1/2 ${
-                  i % 2 === 0
-                    ? "md:pr-12 md:ml-0"
-                    : "md:pl-12 md:ml-auto"
-                }`}
+            <div className="mt-3 sm:mt-0">
+              <h3 className="font-semibold">{exp.role}</h3>
+              <a
+                href={exp.companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-sm text-muted underline decoration-rule underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
               >
-                {/* Timeline dot */}
-                <div
-                  className={`absolute top-6 w-4 h-4 rounded-full bg-primary border-4 border-background z-10 ${
-                    i % 2 === 0
-                      ? "left-2 md:left-auto md:-right-2"
-                      : "left-2 md:-left-2"
-                  }`}
-                />
+                {exp.company}
+              </a>
 
-                {/* Card */}
-                <div className="ml-10 md:ml-0 rounded-2xl border border-border bg-surface-elevated p-6 transition-all hover:shadow-lg">
-                  {/* Header */}
-                  <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
-                    <div>
-                      <h3 className="text-lg font-bold text-foreground">
-                        {exp.role}
-                      </h3>
-                      <a
-                        href={exp.companyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:text-primary-light font-medium transition-colors"
-                      >
-                        {exp.company}
-                      </a>
-                    </div>
-                    <div className="text-right text-sm text-muted">
-                      <div className="flex items-center gap-1">
-                        <BriefcaseIcon />
-                        {exp.period}
-                      </div>
-                      <div className="flex items-center gap-1 mt-1">
-                        <MapPinIcon />
-                        {exp.location}
-                      </div>
-                    </div>
-                  </div>
+              <p className="mt-3 max-w-2xl leading-relaxed text-muted">{exp.description}</p>
 
-                  <p className="text-sm text-muted mb-4">{exp.description}</p>
+              <ul className="mt-4 max-w-2xl space-y-2">
+                {exp.highlights.map((highlight) => (
+                  <li key={highlight} className="flex gap-3 text-sm leading-relaxed">
+                    <span aria-hidden className="font-mono text-muted">
+                      &middot;
+                    </span>
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
 
-                  {/* Highlights */}
-                  <ul className="space-y-2 mb-4">
-                    {exp.highlights.map((h) => (
-                      <li
-                        key={h}
-                        className="flex items-start gap-2 text-sm text-muted"
-                      >
-                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tech tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full bg-primary-bg px-3 py-1 text-xs font-medium text-primary font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="mt-5">
+                <TechList items={exp.technologies} />
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </div>
-    </section>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Section>
   );
 }
